@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { NavBar } from './NavBar'
 import { FaBars } from 'react-icons/fa'
 import { FaBarsStaggered } from 'react-icons/fa6'
 import { RiUserLine } from 'react-icons/ri'
+import { ShopContext } from './context/ShopContext'
+
 
 export const Header = () => {
   const [menuOpened, setMenuOpened] = useState(false);
+  const { getCartCount, navigate }: any = useContext(ShopContext);
   const toggleMenu = () => setMenuOpened((prev) => !prev);
 
   return (
@@ -19,12 +22,11 @@ export const Header = () => {
 
         {/* NAVBAR */}
         <div className='flex-1'>
-          <NavBar 
-            containerStyles={`${
-              menuOpened
-                ? "flex items-start flex-col gap-y-8 fixed top-16 right-6 p-5 bg-white rounded-xl shadow-md w-52 ring-1 ring-slate-900/5 z-50"
-                : "hidden xl:flex gap-x-5 xl:gap-x-7 medium-15 bg-primary ring-1 ring-slate-900/5 rounded-full p-1"
-            }`}
+          <NavBar
+            containerStyles={`${menuOpened
+              ? "flex items-start flex-col gap-y-8 fixed top-16 right-6 p-5 bg-white rounded-xl shadow-md w-52 ring-1 ring-slate-900/5 z-50"
+              : "hidden xl:flex gap-x-5 xl:gap-x-7 medium-15 bg-primary ring-1 ring-slate-900/5 rounded-full p-1"
+              }`}
           />
         </div>
 
@@ -32,14 +34,14 @@ export const Header = () => {
         <div className='flex-1 flex items-center justify-end gap-x-2 xs:gap-x-8'>
           {/* MENU TOGGLE */}
           {menuOpened ? (
-            <FaBarsStaggered 
-              onClick={toggleMenu} 
-              className="xl:hidden cursor-pointer text-xl" 
+            <FaBarsStaggered
+              onClick={toggleMenu}
+              className="xl:hidden cursor-pointer text-xl"
             />
           ) : (
-            <FaBars 
-              onClick={toggleMenu} 
-              className="xl:hidden cursor-pointer text-xl" 
+            <FaBars
+              onClick={toggleMenu}
+              className="xl:hidden cursor-pointer text-xl"
             />
           )}
 
@@ -48,20 +50,22 @@ export const Header = () => {
             <div className='ring-1 ring-slate-900 rounded-full px-3 bold-18'>🛒</div>
             <span>Cart</span>
             <span className="bg-secondary text-white text-[12px] font-semibold absolute -top-3.5 -right-2 flexCenter w-4 h-4 rounded-full shadow-md">
-              0
+              {getCartCount()}
             </span>
           </Link>
 
           {/* USER PROFILE */}
           <div className="group relative">
-          <button className="btn-dark flexCenter gap-x-2">
-            Login
-            <RiUserLine className="text-xl"/>
-          </button>
+            <button className="btn-dark flexCenter gap-x-2"
+              onClick={() => navigate('/login')}>
+
+              Login
+              <RiUserLine className="text-xl" />
+            </button>
           </div>
-          
+
         </div>
-        
+
       </div>
     </header>
   );

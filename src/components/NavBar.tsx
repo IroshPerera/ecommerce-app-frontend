@@ -5,7 +5,7 @@ interface NavBarProps {
   containerStyles: string;
 }
 
-export const NavBar: React.FC<NavBarProps> = ({ containerStyles, onClick }) => {
+export const NavBar: React.FC<NavBarProps> = ({ containerStyles, onClick }: any) => {
 
   const navLinks = [
     { path: '/', title: 'Home' },
@@ -23,7 +23,7 @@ export const NavBar: React.FC<NavBarProps> = ({ containerStyles, onClick }) => {
           className={({ isActive }) =>
             `${isActive ? 'active-link' : ''} px-3 py-2 rounded-full`
           }
-          onClick={onClick}  
+          onClick={onClick}
         >
           {link.title}
         </NavLink>

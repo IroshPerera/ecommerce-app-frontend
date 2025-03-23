@@ -22,7 +22,7 @@ const Item = ({ product }: { product: Product }) => {
     return (
         <div className="overflow-hidden">
             {/* Image */}
-            <Link to={'/'}
+            <Link to={`/product/${product._id}`}
                 onMouseEnter={() => { setHovered(true) }}
                 onMouseLeave={() => { setHovered(false) }}
                 className="flexCenter p-2 bg-[#f5f5f5] overflow-hidden relative">

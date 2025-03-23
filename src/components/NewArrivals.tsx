@@ -13,8 +13,9 @@ import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import Item from './Item';
 
 
-import { useEffect, useState } from 'react';
-import { products } from '../assets/data';
+import { useContext, useEffect, useState } from 'react';
+import { ShopContext } from './context/ShopContext'
+
 
 
 
@@ -22,15 +23,17 @@ import { products } from '../assets/data';
 
 const NewArrivals = () => {
   const [PopularProducts, setPopularProducts] = useState([])
+  const { products }:any = useContext(ShopContext)
 
   useEffect(() => {
     const data = products.slice(0, 7);
     console.log("data",data);
+    setPopularProducts(data);
   
   }, [products]);
   return (
     <section className='max-padd-container pt-16'>
-      <Title title={'New'} title2={'Arrivals'} titleStyles={'pb-10'} paraStyles={'!block !pb-10'} />
+      <Title title={'New'} title2={'Arrivals'} titleStyles={'pb-14'} paraStyles={'!block !pb-10'} />
       {/* Container */}
       <Swiper
         autoplay={{
@@ -57,7 +60,7 @@ const NewArrivals = () => {
         }}
 
         modules={[Autoplay]}
-        className="h-[500 px] mt-5"
+        className="h-[500 px]"
       >{PopularProducts.map((product) => (
         <SwiperSlide key={product._id}>
           <Item product={product} />
@@ -76,3 +79,4 @@ const NewArrivals = () => {
 }
 
 export default NewArrivals
+

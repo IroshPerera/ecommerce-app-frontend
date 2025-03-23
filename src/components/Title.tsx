@@ -9,8 +9,8 @@ interface TitleProps {
 
 const Title: React.FC<TitleProps> = ({title, title2, titleStyles, paraStyles}) => {
   return (
-    <div className={`${titleStyles} pb-1`}>
-        <h2 className={`${titleStyles} h2`}>
+    <div className={`${titleStyles}`}>
+        <h2 className={`h2`}>
             {title}
             <span className="text-secondary !font-light underline">{title2}</span>
         </h2>
